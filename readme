@@ -1,0 +1,105 @@
+# Psychometric Assessment Platform
+
+A web-based psychometric assessment platform for managers using an **ipsative (forced-choice) triplet format** where respondents select:
+- **1 Most Likely**
+- **1 Least Likely**
+
+from three statements per screen.
+
+## Features
+
+- 🔐 User authentication (Supabase-ready)
+- 📊 Adaptive assessment with theme-based coverage
+- 🎯 Theta-like scoring (IRT-style normalized metric)
+- 📈 Percentile rankings
+- 📉 Directional visualization of scores (-3 to +3 scale)
+- 🎨 Results dashboard with color zones (Red/Amber/Green)
+
+## Tech Stack
+
+- **Frontend**: React, React Router
+- **Backend**: Flask (Python)
+- **Database**: SQLite (can be migrated to PostgreSQL/Supabase)
+- **Authentication**: JWT (Supabase Auth ready)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- Python 3.8+
+- pip
+
+### Backend Setup
+
+```
+bash
+cd backend
+pip install -r requirements.txt
+python app.py
+```
+
+The backend will run on http://localhost:5000
+
+### Frontend Setup
+
+```
+bash
+cd frontend
+npm install
+npm start
+```
+
+The frontend will run on http://localhost:3000
+
+### Initialize Sample Data
+
+After starting the backend, create sample data:
+
+```
+bash
+# Using curl
+curl -X POST http://localhost:5000/api/demo/create-sample-data
+```
+
+Or use the demo data creation feature in the app.
+
+## Project Structure
+
+```
+psychometric-assessment/
+├── backend/
+│   ├── app.py              # Main Flask app
+│   ├── models.py           # Database models
+│   ├── routes.py           # API routes
+│   ├── requirements.txt    # Python dependencies
+│   └── create_sample_data.py
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── pages/         # React pages
+│   │   ├── services/      # API services
+│   │   ├── App.js
+│   │   └── index.js
+│   └── package.json
+└── README.md
+```
+
+## User Flow
+
+1. **Login** - User authenticates
+2. **Instructions** - View assessment purpose and format
+3. **Assessment** - Complete triplet questions (adaptive)
+4. **Processing** - Scores are computed
+5. **Results** - View theme scores, percentiles, and visualizations
+
+## Assessment Logic
+
+- **Triplet Format**: 3 statements per screen, select 1 Most Likely + 1 Least Likely
+- **Adaptive Testing**: Next triplet selected based on lowest theme coverage
+- **Stopping Criteria**: Minimum 15 or Maximum 30 triplets
+- **Scoring**: Theta-like score normalized to -3 to +3 scale with percentile ranking
+
+## License
+
+MIT
